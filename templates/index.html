@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+<head>
+    <style>
+        .center {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .container{
+            width: 400px;
+            height: 350px;
+            text-align: center;
+            margin: 0 auto;
+            background-color: rgba(44, 62, 80,0.7);
+            margin-top: 160px;
+        }
+    </style>
+</head>
+<div class="container">
+    <div class="center">
+
+        <form class="text-center border border-light p-5" action="success" method="POST">
+            {% csrf_token %}
+
+            <p class="h3 mb-3">Payment Details</p>
+            <table>
+                <tr><td><p class="mb-3">Creative Writing</p></td>
+                <td><input type="text"  required class="form-control mb-4"></td></tr>
+                <tr><td><p class="mb-3">Name</p></td>
+                <td><input type="name" name="name" id="name" required class="form-control mb-4"></td></tr>
+                <tr><td><p class="mb-3">Email Id</p></td>
+                <td><input type="email" name="mail" id="mail" required class="form-control mb-4"></td></tr>
+                <tr><td><p class="mb-3">Phone Number</p></td>
+                <td><input type="tel" id="phone" name="phone" pattern="[0-9]{10}" required class="form-control mb-4"></td></tr>
+            </table>
+
+            <!-- RAZORPAY INTEGRATION HERE -->
+            <script src="https://checkout.razorpay.com/v1/checkout.js" data-key="rzp_test_Wv3MrCDLJ31CHg"
+                data-amount="50000" data-currency="INR" data-order_id="{{payment.id}}" data-buttontext="Pay with Razorpay"
+                data-name="Yoshops" data-description="Django and Data Science"
+                data-image="logo.jpg" data-prefill.name="PC" data-prefill.email="kritikadhir27@gmail.com"
+                data-theme.color="#F37254"></script>
+        </form>
+
+    </div>
+    </div>
+
+</div>
+{% endblock %}
